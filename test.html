@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1####### */
+        /* li{
+            display: block !important;
+        }
+        #item{
+            background-color: black;
+            padding: 50px;
+            display: block;
+            
+        } */
+
+
+        /* 2######## */
+
+        input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+.Username-blur-ckecker{
+  font-weight: 700;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+      
+    </style>
+</head>
+<body>
+
+
+    <!-- 1##### -->
+    <!-- <div class="xd" style=" background-color: aquamarine; width: 70%; height: 5vh;">
+    </div>
+    <div id="item">
+    </div> -->
+
+
+    <!-- 2##### -->
+
+    
+    <form action="">
+
+        <div class="container">
+            <label for="uname"><b>Username</b><i id="ielm"></i></label>
+            <input type="text" placeholder="Enter Username" name="uname" class="Username-login-prompt"  required>
+            <span class="Username-blur-ckecker"></span>
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" class="Password-login-prompt" required>
+            <span class="Password-blur-ckecker"></span>
+            <button type="submit" class="login-btn-submit">Login</button>
+            
+            
+        </div>
+        <h1 id="error-success"></h1>
+    </form>
+        
+    <script>
+
+    let Username=document.querySelector('.Username-login-prompt')
+    let Password=document.querySelector('.Password-login-prompt')
+    let span=document.getElementById('ielm')
+    let checker=document.getElementById('error-success')
+    const blur_username=document.querySelector('.Username-blur-ckecker')
+    const blur_password=document.querySelector('.Password-blur-ckecker')
+
+
+
+
+    Username.addEventListener('keyup',function(){
+      if(Username.value.length > 7){
+        span.innerHTML=" correct "
+      }else{
+         span.innerHTML=" problem "
+
+      }
+    })
+
+
+
+    Username.addEventListener('blur',function(){
+
+      if(Username.value.length > 6){
+         blur_username.style.display='block'
+        blur_username.style.color='green'
+        blur_username.innerHTML='نام کاربری شما معتبر است'
+      }else{
+        blur_username.style.display='block'
+         blur_username.style.color='red'
+         blur_username.innerHTML='نام کاربری شما معتبر نیست'
+      }
+      setTimeout(function(){
+        blur_username.style.display='none'
+      },5000)
+
+    })
+    Password.addEventListener('blur',function(){
+      if(Password.value.length > 5){
+        blur_password.style.display='block'
+        blur_password.style.color='green'
+        blur_password.innerHTML='رمز عبور شما معتبر است '
+      }else{
+        blur_password.style.display='block'
+         blur_password.style.color='red'
+         blur_password.innerHTML='رمز عبور شما معتبر نیست '
+      }
+      setTimeout(function(){
+        blur_password.style.display='none'
+      },5000)
+
+      
+    })
+
+
+
+    document.querySelector('.login-btn-submit').addEventListener('click', function (event) {  
+      event.preventDefault(); // Prevent the form from submitting  
+        if (Username.value.length < 6 || Password.value.length < 7){
+            checker.innerHTML='نام کاربری یا رمز عبور اشتباه است '
+            checker.style.color='red'
+              checker.style.display='block'
+        }else{
+         
+            checker.innerHTML='کاربر به موفقیت عبور کرد'
+            checker.style.color='green'
+            checker.style.display='block'
+        }
+        setTimeout(function(){
+            checker.style.display='none'
+        },3000)
+
+    })
+
+    
+
+
+
+        // 1#####
+        // let div=document.getElementsByTagName('div')
+        // let ul_item=document.createElement('ul')
+        // ul_item.setAttribute('class','ul_class')
+        // div[0].append(ul_item)
+        // let name=prompt('Enter your name :')
+        // const li_item1=document.createElement('li')
+        // const li_item2=document.createElement('li')
+        // li_item1.innerHTML=name
+        // li_item2.innerHTML=name
+        // let res=document.getElementsByClassName('ul_class')
+        // res[0].append(li_item1)
+        // res[0].append(li_item2)
+
+
+
+
+        // 2#####
+        // let div=document.getElementById('item')
+        // let flag=true
+        // div.addEventListener('click',function(){
+        //     if(flag){
+        //         let check=document.getElementsByClassName('xd')
+        //         check[0].style.display='none'
+        //         flag=false
+        //     }
+        //     else{
+        //         let check=document.getElementsByClassName('xd')
+        //         check[0].style.display='block'
+        //         flag=true
+
+        //     }
+        // })
+
+
+        // 3########
+
+        
+    </script>
+</body>
+</html>
