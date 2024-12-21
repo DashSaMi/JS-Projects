@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /* Style for the select elements */  
+select {  
+    width: 200px;               /* Width of the select box */  
+    padding: 8px;              /* Padding inside the select box */  
+    margin: 10px 0;            /* Margin to separate from other elements */  
+    border: 1px solid #ccc;    /* Light border */  
+    border-radius: 4px;        /* Rounded corners */  
+    font-size: 16px;           /* Font size */  
+    background-color: rgb(0, 8, 72);   /* Background color */  
+    color: #ffffff;               /* Text color */  
+    transition: border-color 0.3s ease; /* Smooth transition for focus */  
+}  
+
+select:focus {  
+    border-color: #0011ff;     /* Change border color on focus */  
+}  
+
+/* Style for options (not all browsers support this) */  
+option {  
+    background-color: rgb(214, 226, 255); /* Background color for options */  
+    padding: 5px;
+    color: #333;             /* Text color for options */  
+}  
+
+/* Option hover effect */  
+select:hover {  
+    border-color: #024690; /* Darker border on hover */  
+}  
+    </style>
+</head>
+<body>
+    <select name="" id="county">
+        <option value="Iran">Iran</option>
+        <option value="Canada">Canada</option>
+        <option value="Usa">Usa</option>
+        <option value="Uae">Uae</option>
+    </select>
+    <select id="city" >
+       <option value="">More cities</option>
+        
+    </select>
+    <script>
+        all_countires={
+            Iran:['tehran','shiraz'],
+            Canada:['toranto'],
+            Usa:['La','New York'],
+            Uae:['Dubai','abu Dhabi']
+        }
+
+        let county=document.getElementById('county')
+        let city=document.getElementById('city')
+
+        county.addEventListener('change',function(){
+
+            const county_name=county.value
+            const city_names=all_countires[county_name]
+            city.innerHTML=''
+            city_names.forEach(function(c){
+                 city.innerHTML+='<option>'+ c +'</option>'
+            })
+        })
+        
+    </script>
+</body>
+</html>
