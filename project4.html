@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="" id="input-value">
+    <button type="submit" id="btn-submit">sumbit</button>
+<div class="all-items">
+    <h1 class="title-city"></h1>
+    <br>
+    <h3 class="temproture"></h3>
+    <br>
+    <div class="shows-weather">
+        <img src="" class="img" alt="" width="35" height="35">
+        <span class="span"></span>
+    </div>
+    <h4 class="humidity"></h4>
+    <h4 class="wind-speed"></h4>
+</div>
+
+
+    <script>
+        let $=document
+
+        const all_city=[
+            {city:'Tehran',temp:42,weather:'sunny',humidity:'35%',windspeed:'38kh'},
+            {city:'damavand',temp:22,weather:'cloudy',humidity:'11%',windspeed:'8kh'}
+        ]
+
+        let btn=    $.getElementById('btn-submit')
+        let input=  $.getElementById('input-value')
+
+        btn.addEventListener('click',function(){
+            all_city.find(function(item){
+              if (item.city.toLowerCase() == input.value.toLowerCase()){
+                $.querySelector('.title-city').innerHTML='Weather in' + item.city +' City'
+                $.querySelector('.temproture').innerHTML= item.temp+'^C'
+                $.querySelector('.shows-weather .img').setAttribute('src','https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg')
+                $.querySelector('.shows-weather .span').innerHTML=item.weather
+                $.querySelector('.humidity').innerHTML='Humidity is :'+item.humidity
+                $.querySelector('.wind-speed').innerHTML='windspeed is :'+item.windspeed
+          
+              }else{
+              alert('این شهر وجود نداره')
+              }
+              
+            })
+        })
+    </script>
+</body>
+</html>
