@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .input {  
+            margin: auto;
+            display: block;
+            width: 50%;      
+            min-width: 200px;
+                         
+            padding: 10px;                   /* Padding inside the input */  
+            font-size: 16px;                 /* Increase the font size for readability */  
+            border: 2px solid #4CAF50;       /* Green border matching button styles */  
+            border-radius: 5px;              /* Rounded corners */  
+            outline: none;                   /* Remove default outline */  
+            transition: border-color 0.3s, box-shadow 0.3s; /* Transition effects */  
+        }  
+        
+        /* Focus effect */  
+        .input:focus {  
+            border-color: #4556a0;           /* Darker border on focus */  
+            box-shadow: 0 0 5px rgba(72, 83, 211, 0.301); /* Add shadow on focus */  
+        }  
+        
+        /* Placeholder text style */  
+        .input::placeholder {  
+            color: #aaa;                     /* Light gray color for placeholder */  
+            opacity: 1;                      /* Ensures visibility */  
+        }
+    </style>
+</head>
+<body id="body">
+
+    <input class="input" type="" name="" id="input_id" placeholder="English Nmae pls:)">
+
+
+    <script>
+        let input_id=document.getElementById('input_id')
+        input_id.addEventListener('keypress',function(event){
+            if ((event.keyCode >= 65 && event.keyCode <= 90) || (event.keyCode >= 97 && event.keyCode <= 122) || (event.keyCode >= 48 && event.keyCode <= 57)) {  
+                // it will show you on input
+            }else{
+                event.preventDefault()
+                  // it won't show you on input
+                 
+            }
+        })
+
+
+
+
+
+        let body=document.getElementById('body')
+     
+
+    </script>
+
+</body>
+</html>
