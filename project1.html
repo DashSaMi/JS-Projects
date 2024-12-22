@@ -89,7 +89,7 @@ span.psw {
     <!-- 2##### -->
 
     
-    <form action="">
+    <form action="" id="form-page">
 
         <div class="container">
             <label for="uname"><b>Username</b><i id="ielm"></i></label>
@@ -106,8 +106,9 @@ span.psw {
     </form>
         
     <script>
-
+    let form=document.getElementById('form-page')
     let Username=document.querySelector('.Username-login-prompt')
+    let btn=document.querySelector('.login-btn-submit')
     let Password=document.querySelector('.Password-login-prompt')
     let span=document.getElementById('ielm')
     let checker=document.getElementById('error-success')
@@ -115,7 +116,7 @@ span.psw {
     const blur_password=document.querySelector('.Password-blur-ckecker')
 
 
-
+   
 
     Username.addEventListener('keyup',function(){
       if(Username.value.length > 7){
@@ -156,6 +157,7 @@ span.psw {
       }
       setTimeout(function(){
         blur_password.style.display='none'
+        
       },5000)
 
       
@@ -163,7 +165,7 @@ span.psw {
 
 
 
-    document.querySelector('.login-btn-submit').addEventListener('click', function (event) {  
+    form.addEventListener('submit', function (event) {  
       event.preventDefault(); // Prevent the form from submitting  
         if (Username.value.length < 6 || Password.value.length < 7){
             checker.innerHTML='نام کاربری یا رمز عبور اشتباه است '
