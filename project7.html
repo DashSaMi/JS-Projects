@@ -1,0 +1,63 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Password Toggle Example</title>  
+    <style>
+        body {  
+            font-family: Arial, sans-serif;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            background-color: #f0f0f0;  
+        }  
+        
+        .input-container {  
+            position: relative;  
+            width: 500px;  
+        }  
+        
+        input[type="password"], input[type="text"] {  
+            width: 100%;  
+            border-radius: 20px;
+            height: 7vh;
+            border: 1px solid #ccc;  
+            font-size: 26px;  
+        }  
+        
+        .eye-icon {  
+            position: absolute;  
+            right: 10px;  
+            top: 50%;  
+            transform: translateY(-33%);  
+            cursor: pointer;  
+            scale: 2;
+        }
+    </style> 
+</head>  
+<body>  
+    <div class="input-container">  
+        <input type="password" id="password" placeholder="Enter your password" required>  
+        <span id="toggle-password" class="eye-icon">👁️</span>  
+    </div>  
+
+    <script>
+
+        document.getElementById('toggle-password').addEventListener('click', function () {  
+            const passwordInput = document.getElementById('password');  
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';  
+            console.log(type)
+            passwordInput.setAttribute('type', type);  
+            
+            // Change the icon based on type  
+            this.textContent = type === 'text' ? '🫣' : '👁️'; // Toggle visibility icon  
+        });
+        
+
+        let input
+
+    </script>  
+</body>  
+</html>
