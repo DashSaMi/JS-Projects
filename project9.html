@@ -1,0 +1,129 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Custom Context Menu Example</title>  
+    <style>  
+        body {  
+            font-family: sans-serif;  
+            padding: 20px;  
+            background-color: #f9f9f9;  
+        }  
+
+        /* Style the custom context menu */  
+        .context {  
+            display: none; /* Hidden by default */  
+            position: absolute;  
+            background: #6f6fd63a; /* Background color of the menu */  
+            border-radius: 8px; /* Rounded corners */  
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Box shadow */  
+            z-index: 1000;  
+        }  
+        
+        .context.is-visible {  
+            display: block; /* Show when visible */  
+        }  
+        
+        .context ul {  
+            list-style: none;  
+            padding: 0;  
+            margin: 0;  
+        }  
+        
+        .context .menu-item {  
+            display: flex;  
+            align-items: center;  
+            padding: 10px 15px;  
+            border-radius: 4px;
+            color: #333; /* Text color */  
+            transition: background-color 0.3s ease; /* Smooth transition for hover effects */  
+        }  
+        
+        .context .menu-item:hover {  
+            background: #ffffff; /* Background color on hover */  
+           
+        }  
+        
+        .context .menu-item i {  
+            margin-right: 10px; /* Space between icon and text */  
+            color: #3f51b5; /* Icon color */  
+            transition: color 0.3s; /* Smooth transition for icon color */  
+        }  
+        
+        .context .menu-item:hover i {  
+            color: #673ab7; /* Change color on hover */  
+        }  
+        
+        /* Hide by default */  
+        .hide {  
+            display: none;  
+        }  
+    </style>  
+</head>  
+<body>  
+
+<h1 style="text-align: center; font-size:5rem; font-weight:900;">Right Click On the Screen</h1>
+
+<!-- Custom context menu -->  
+<div id="contextMenu" class="context hide">  
+    <ul>  
+        <li class="menu-item" onclick="editItem()">  
+            <i class="fas fa-edit"></i> Edit  
+        </li>  
+        <li class="menu-item" onclick="addToCart()">  
+            <i class="fas fa-shopping-cart"></i> Add to Cart  
+        </li>  
+        <li class="menu-item" onclick="saveToWishlist()">  
+            <i class="fas fa-heart"></i> Save to Wishlist  
+        </li>  
+        <li class="menu-item" onclick="shareItem()">  
+            <i class="fas fa-share-alt"></i> Share  
+        </li>  
+        <li class="menu-item" onclick="copyLink()">  
+            <i class="fas fa-link"></i> Copy Link  
+        </li>  
+        <li class="menu-item" onclick="viewImage()">  
+            <i class="fas fa-image"></i> View Image  
+        </li>  
+        <li class="menu-item" onclick="openSettings()">  
+            <i class="fas fa-cog"></i> Settings  
+        </li>  
+    </ul>  
+</div>  
+
+<script>  
+    const contextMenu = document.getElementById('contextMenu');  
+   
+
+window.addEventListener('contextmenu',function(event){
+    event.preventDefault()
+    let x_value=event.pageX
+    let y_value=event.pageY
+    contextMenu.style.left=`${x_value}px`
+    contextMenu.style.top=`${y_value}px`
+    contextMenu.style.display="block"
+
+})
+
+window.addEventListener('keydown',function(event){
+    if(event.key=='Escape'){
+        contextMenu.style.display="none"
+    }
+})
+    
+
+
+function editItem() { alert('Edit Item'); }  
+function addToCart() { alert('Added to Cart'); }  
+function saveToWishlist() { alert('Saved to Wishlist'); }  
+function shareItem() { alert('Share Item'); }  
+function copyLink() { alert('Link Copied'); }  
+function viewImage() { alert('View Image'); }  
+function openSettings() { alert('Open Settings'); }  
+  
+</script>  
+
+</body>  
+</html>
