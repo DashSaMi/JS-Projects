@@ -1,0 +1,58 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Loader Example</title>  
+    
+    <style>  
+        /* loader css */  
+        .container-loder {  
+       
+        }  
+
+        .loader {  
+            position: absolute;  
+            top: 50%;  
+            left: 50%;  
+            z-index: 10;  
+          
+            border-radius: 5px;  
+            background: #1e3f57;  
+            animation: dot1_ 2.5s cubic-bezier(0.55, 0.3, 0.24, 0.99) infinite; /* Change duration */  
+        }  
+
+        .loader:nth-child(2) {  
+            z-index: 11;  
+            width: 150px;  
+            height: 90px;  
+            margin-top: -45px;  
+            margin-left: -75px;  
+            border-radius: 3px;  
+            background: #3c517d;  
+            animation-name: dot2_;  
+            animation-duration: 2.5s; /* Change duration */  
+        }  
+
+   
+    </style>  
+
+</head>  
+<body>  
+
+<div class="container-loder">  
+    <h1 class="gradient-heading">Loading Bar in Websites</h1>  
+    <div class="loader"></div>  
+    <div class="loader"></div>  
+    <div class="loader"></div>  
+</div>  
+
+<script>  
+    window.addEventListener('load', function() {  
+        setTimeout(function() {  
+            document.querySelector('.container-loder').style.display = "none"; // Delay of 5000ms (5 seconds)  
+        }, 5000);  
+    });  
+</script>  
+</body>  
+</html>
