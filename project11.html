@@ -1,0 +1,79 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Centered Input</title>  
+    <style>  
+        body {  
+            padding: 0;  
+            margin: 0;  
+            box-sizing: border-box;  
+            background-color: antiquewhite;  
+            height: 100vh; /* Ensures body takes full height */  
+          
+        }  
+        .all-conteiner{
+            display: flex; /* Enable flexbox */  
+            justify-content: center; /* Center horizontally */  
+            align-items: center; /* Center vertically */  
+           height: 100%; 
+           
+        }
+        
+        .container {  
+            display: flex;  
+            align-items: center; /* Align items vertically centered */  
+            position: relative; /* Required for absolute positioning of span */  
+            background-color: rgba(200, 220, 255, 0.464);
+            border-radius: 10px;
+            width: 400px;
+            height: 8vh;
+        }  
+        
+  
+          
+
+        
+    </style>  
+</head>  
+<body>  
+    <div class="all-conteiner">
+
+        <div class="container">  
+            
+            <input type="text" class="input" id="input-username">  
+            <span class="line"></span>
+            <span class="number" id="length-number-span">16</span>  
+        </div>  
+    </div>
+
+    <script>
+        let username = document.getElementById('input-username');  
+        let span = document.getElementById('length-number-span');  
+        let maxLength = 16;  
+        
+        function updateColor() {  
+            const length = username.value.length;  
+        
+            if (length >= 11 && length <= maxLength) {  
+                span.style.color = "red";  
+            } else if (length >= 7 && length <= 10) {  
+                span.style.color = "yellow";  
+            } else if (length >= 0 && length <= 6) {  
+                span.style.color = "green";  
+            }  
+            const value = maxLength - length;  
+            span.innerHTML = value;  
+        }  
+        
+        username.addEventListener('keypress', function(event) {  
+        
+     
+        updateColor();
+        })
+      
+    </script>
+        
+</body>  
+</html>
