@@ -31,10 +31,32 @@
             height: 8vh;
         }  
         
-  
+        input {  
+            padding-left: 15px;
+            font-size: 20px;
+            color: rgb(24, 23, 23);
+            width: 100%;  
+            background-color: transparent;  
+            outline: none;
+            border:none;
+        }  
+        .line{
+            height: 100%;
+            width: 6px;
+            background-color: rgb(228, 160, 255);
+            margin-right: 45px;
+        }
+
+        .number {  
+            position: absolute; /* Keep the span absolute */  
+            right: 10px;
+           font-size: 20px;
+           font-weight: 900;
+           color: rgb(0, 171, 80);
+           
           
 
-        
+        }  
     </style>  
 </head>  
 <body>  
@@ -68,10 +90,29 @@
         }  
         
         username.addEventListener('keypress', function(event) {  
+            const length = username.value.length;  
+            
+           
+            if (length < maxLength) {  
+                const isValidChar = /^[a-zA-Z0-9]$/.test(event.key); 
+                
+                if (!isValidChar) {  
+                    event.preventDefault(); 
+                }  
+            } else {  
+              
+                event.preventDefault();  
+            }  
+            
+            updateColor(); 
+        });  
+        
+     
+        username.addEventListener('input', updateColor);  
         
      
         updateColor();
-        })
+      
       
     </script>
         
