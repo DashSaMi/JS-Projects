@@ -1,0 +1,137 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Document</title>  
+    <style>  
+        body {  
+            background-color: #c4c4c4;  
+            margin: 0;  
+            padding: 0;  
+            box-sizing: border-box;  
+            font-family: 'Arial', sans-serif;  
+        }  
+
+        .div-container{  
+            margin-top: 200px !important;  
+            width: 100%;  
+            max-width: 600px;  
+            margin: auto;  
+            padding: 20px;  
+            background: rgb(236, 236, 236);  
+            border-radius: 10px;  
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+        }  
+
+        h1 {  
+            text-align: center;  
+            color: #333;  
+        }  
+
+        .box-input {  
+            display: flex;  
+            flex-direction: column;  
+            align-items: center;  
+            margin-bottom: 20px;  
+        }  
+
+        .input-text {  
+            width: 100%;  
+            height: 40px;  
+            border: 2px solid #ccc;  
+            border-radius: 5px;  
+            padding: 5px 10px;
+            max-width: 90%;  
+            font-size: 16px;  
+            transition: border-color 0.3s;  
+        }  
+
+       
+
+        button {  
+            padding: 10px 15px;  
+            border: none;  
+            border-radius: 5px;  
+            background-color: #007BFF;  
+            color: white;  
+            cursor: pointer;  
+            transition: background-color 0.3s, transform 0.2s;  
+            flex: 1; /* Allow buttons to grow equally */  
+            margin: 0 5px; /* Space between buttons */  
+        }  
+
+        button:hover {  
+            background-color: #0056b3;  
+            transform: translateY(-2px);  
+        }  
+
+        button:active {  
+            transform: translateY(0);  
+        }  
+
+        .show-container {  
+            display: flex;  
+            flex-direction: column;  
+            gap: 10px;  
+        }  
+
+    </style>  
+</head>  
+<body>  
+    <div class="div-container">  
+        <h1>Form Note App JS</h1>  
+        <div class="box-input">  
+            <input type="text" id="input-id" class="input-text" autocomplete="off" placeholder="Enter your note">
+            <div class="color-divs">  
+                <div class="itms-color" style="background-color: rgba(255, 0, 102, 0.499);"></div>  
+                <div class="itms-color" style="background-color: rgb(255, 11, 11);"></div>  
+              
+            <div class="btns-item">  
+                <button id="submit">Submit</button>  
+                <button id="delete">Delete</button>  
+            </div>  
+        </div>  
+        <div class="show-container"></div>  
+    </div>  
+    <script>  
+        let input = document.getElementById('input-id');  
+        let deletebtn = document.getElementById('delete');  
+        let submit = document.getElementById('submit');  
+        let generate_elm_color = 'white';  
+
+        input.addEventListener('keydown', function(event) {  
+            if (event.key == "Enter") {  
+                submit_note();  
+            }  
+        });  
+
+        submit.addEventListener('click', submit_note);  
+
+        function submit_note() {  
+            if (input.value.length !== 0) {  
+                const noteDiv = document.createElement('div');  
+                noteDiv.className = 'js-div-note';  
+                noteDiv.style.backgroundColor = generate_elm_color;  
+                noteDiv.innerHTML = `<span>${input.value}</span>`;  
+                
+                document.querySelector('.show-container').appendChild(noteDiv);  
+
+                // Trigger a reflow to enable the transition  
+                requestAnimationFrame(() => {  
+                    noteDiv.classList.add('show');  
+                });  
+
+                input.style.backgroundColor = 'white';  
+                generate_elm_color = 'white';  
+                input.value = "";  
+                input.focus();  
+                delete_elm()
+            }  
+        }  
+
+        
+     
+    </script>  
+</body>  
+</html>
