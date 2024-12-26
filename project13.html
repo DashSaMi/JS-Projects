@@ -47,7 +47,38 @@
             transition: border-color 0.3s;  
         }  
 
-       
+        .input-text:focus {  
+            border-color: #007BFF;  
+            outline: none;  
+        }  
+
+        .itms-color {  
+            width: 40px;  
+            height: 40px;  
+            border-radius: 50%;  
+            display: inline-block;  
+            margin: 0 5px;  
+            cursor: pointer;  
+            transition: transform 0.3s, box-shadow 0.3s;  
+        }  
+
+        .itms-color:hover {  
+            transform: scale(1.1);  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);  
+        }  
+
+        .color-divs {  
+            display: flex;  
+            justify-content: center; /* Center align color divs */  
+            margin-bottom: 15px; /* Spacing between color items and buttons */  
+            margin-top: 15px;
+        }  
+
+        .btns-item {  
+            display: flex;  
+            justify-content: space-between;  
+            width: 100%; /* Ensure buttons take full width */  
+        }  
 
         button {  
             padding: 10px 15px;  
@@ -76,6 +107,27 @@
             gap: 10px;  
         }  
 
+        .js-div-note {  
+            padding: 10px;  
+            border-radius: 5px;  
+            transition: transform 0.3s ease, opacity 0.3s ease;  
+            opacity: 0;  
+            transform: translateY(20px);  
+            cursor: pointer;
+        }  
+
+        .js-div-note span{
+            font-size: 3rem;
+            text-align: center;
+            display: inline-block;
+            font-weight: 800;
+            width: 100%;
+        }
+
+        .js-div-note.show {  
+            opacity: 1;  
+            transform: translateY(0);  
+        }  
     </style>  
 </head>  
 <body>  
@@ -86,7 +138,13 @@
             <div class="color-divs">  
                 <div class="itms-color" style="background-color: rgba(255, 0, 102, 0.499);"></div>  
                 <div class="itms-color" style="background-color: rgb(255, 11, 11);"></div>  
-              
+                <div class="itms-color" style="background-color: rgb(255, 142, 3);"></div>  
+                <div class="itms-color" style="background-color: rgb(106, 255, 0);"></div>  
+                <div class="itms-color" style="background-color: rgb(7, 158, 67);"></div>  
+                <div class="itms-color" style="background-color: rgb(0, 64, 240);"></div>  
+                <div class="itms-color" style="background-color: rgb(0, 110, 130);"></div>  
+                <div class="itms-color" style="background-color: rgb(255, 3, 255);"></div>  
+            </div>  
             <div class="btns-item">  
                 <button id="submit">Submit</button>  
                 <button id="delete">Delete</button>  
@@ -131,7 +189,32 @@
         }  
 
         
-     
+        let colors_div = document.querySelectorAll('.itms-color');  
+        colors_div.forEach(function(color) {  
+            color.addEventListener('click', color_chnage);  
+        });  
+
+        function color_chnage(event) {  
+            let back_color = event.target.style.backgroundColor;  
+            input.style.backgroundColor = back_color;  
+            generate_elm_color = back_color;  
+            input.focus();  
+        }  
+
+
+        function delete_elm(){
+
+            var divs_new_elm=document.querySelectorAll('.js-div-note')
+            divs_new_elm.forEach(function(elm){
+             elm.addEventListener('click',test)
+              
+            })      
+        }
+
+        function test(event){
+          event.target.parentElement.remove()
+        }
+      
     </script>  
 </body>  
 </html>
