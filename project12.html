@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        html{
+
+            font-family: sans-serif;
+        }
+        h1{
+            text-align: center;
+            color: wheat;
+        }
+        /* From Uiverse.io by vikiWayne */ 
+.button {
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: auto;
+    display: block;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #2c9caf;
+    transition: all 1000ms;
+    font-size: 15px;
+    position: relative;
+    overflow: hidden;
+    outline: 2px solid #2c9caf;
+  }
+  
+  button:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+    outline: 2px solid #70bdca;
+    box-shadow: 4px 5px 17px -4px #268391;
+  }
+  
+  button::before {
+    content: "";
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #2c9caf;
+    transform: skewX(45deg);
+    z-index: -1;
+    transition: width 1000ms;
+  }
+  
+  button:hover::before {
+    width: 250%;
+  }
+
+
+
+
+
+  .modal {  
+    display: flex; /* Use flex to center the modal */  
+    justify-content: center;  
+    align-items: flex-start; /* Start at the top */  
+    position: fixed; /* Stay in place */  
+    z-index: 10; /* Sit on top */  
+    left: 0;  
+    top: 0;  
+    margin-top: 300px;
+    width: 100%; /* Full width */  
+    height: 100%; /* Full height */  
+    opacity: 0; /* Invisible by default */  
+    visibility: hidden; /* Not clickable */  
+    transition: opacity 0.5s, visibility 0.5s, margin-top 0.5s; /* Smooth transitions */  
+}  
+
+.modal-content {  
+    border-radius: 15px;
+    background-color: #fefefe;  
+    margin: 10px auto; /* Center the modal */  
+    padding: 20px;  
+    border: 1px solid #888;  
+    width: 60%; /* Could be more or less, depending on screen size */  
+    transform: translateY(-100px); /* Start off-screen */  
+    transition: transform 0.5s ease; /* Smooth slide-in effect */  
+}  
+
+
+
+    </style>
+</head>
+<body class="body" style="background-color: blueviolet;">
+    <div class="div">
+
+        <H1>Click On the button To show to modal</H1>
+        <button class="button" id="btn">Make the Modal</button>
+        
+    </div>
+
+    <div id="myModal" class="modal">  
+        <div class="modal-content">  
+     
+            <h2>Modal Title</h2>  
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil sequi, animi fugit odit accusamus aliquam reprehenderit totam natus. Eligendi tempora facere, sit quas a eveniet sapiente sint saepe beatae quam?</p>  
+            <span>by cliking on the "<--" and "Esc" btns you can close it</span>
+            
+        </div>  
+    </div>  
+
+
+
+
+   <script>
+        let color=['blue','red','pink','black','orange']
+        let num
+        let check
+        setInterval(function(){
+            num=Math.floor(Math.random() * color.length);
+            
+            if(check != num){
+                 document.querySelector('.body').style.background=color[num]
+
+              
+                }
+                check=num
+        },5000)
+
+
+
+
+        const button = document.getElementById('btn');  
+        const modal = document.getElementById('myModal');  
+        const modalClose = document.getElementById('closeModal');  
+        
+        button.addEventListener('click', function() {  
+            modal.classList.add('show');  
+        });  
+        
+        modalClose.addEventListener('click', function() {  
+            modal.classList.remove('show');  
+        });  
+
+   </script>
+</body>
+</html>
