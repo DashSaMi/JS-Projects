@@ -3,155 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convert Page</title>
+    <title>Temperature Converter</title>
     <style>
-        body{
-            padding: 0px;
-            margin: 0px;
+        body {
+            padding: 0;
+            margin: 0;
             box-sizing: border-box;
-            background-image: linear-gradient(to bottom right,rgb(85, 152, 245),rgb(54, 113, 241));
+            background-image: linear-gradient(to bottom right, rgb(85, 152, 245), rgb(54, 113, 241));
             width: 100%;
-           height: 100vh;
-          
+            height: 100vh;
         }
- 
-      
-        .input {  
+        .input {
             margin: auto;
             display: block;
-            width: 50%;      
+            width: 50%;
             min-width: 200px;
-                         
-            padding: 10px;                   /* Padding inside the input */  
-            font-size: 16px;                 /* Increase the font size for readability */  
-            border: 2px solid #4CAF50;       /* Green border matching button styles */  
-            border-radius: 5px;              /* Rounded corners */  
-            outline: none;                   /* Remove default outline */  
-            transition: border-color 0.3s, box-shadow 0.3s; /* Transition effects */  
-        }  
-        
-        /* Focus effect */  
-        .input:focus {  
-            border-color: #45a049;           /* Darker border on focus */  
-            box-shadow: 0 0 5px rgba(72, 211, 126, 0.5); /* Add shadow on focus */  
-        }  
-        
-        /* Placeholder text style */  
-        .input::placeholder {  
-            color: #aaa;                     /* Light gray color for placeholder */  
-            opacity: 1;                      /* Ensures visibility */  
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .flex-item {  
-            display: flex;                 /* Use flexbox for layout */  
-            gap: 10px;                    /* Space between the buttons */  
-            justify-content: center;      /* Center the buttons horizontally */  
-            margin-top: 20px;             /* Margin at the top */  
-        }  
-        
-        .flex-item button {  
-            background-color: #4CAF50;    /* Green background */  
-            color: white;                  /* White text color */  
-            border: none;                  /* No borders */  
-            padding: 10px 20px;            /* Padding inside the button */  
-            text-align: center;            /* Center text */  
-            text-decoration: none;         /* No underlines */  
-            display: inline-block;         /* Buttons are inline */  
-            font-size: 16px;               /* Set font size */  
-            border-radius: 5px;           /* Rounded corners */  
-            cursor: pointer;               /* Pointer cursor on hover */  
-            transition: background-color 0.3s, transform 0.3s; /* Transition for hover effects */  
-        }  
-        
-        /* Hover effects */  
-        .flex-item button:hover {  
-            background-color: #45a049;     /* Darker green when hovered */  
-            transform: scale(1.05);        /* Slightly enlarges button on hover */  
-        }  
-        
-        /* Active state */  
-        .flex-item button:active {  
-            transform: scale(0.95);        /* Slightly shrinks button when pressed */  
-        }  
-        
-        /* Disabled state */  
-        .flex-item button:disabled {  
-            background-color: #cccccc;     /* Gray background */  
-            cursor: not-allowed;           /* Not-allowed cursor */  
-        }  
+        .input:focus {
+            border-color: #45a049;
+            box-shadow: 0 0 5px rgba(72, 211, 126, 0.5);
+        }
+        .input::placeholder {
+            color: #aaa;
+            opacity: 1;
+        }
+        .flex-item {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+     
     </style>
 </head>
 <body>
-    <div> 
-  
-        <h1 id="h1-as-title" style="text-align: center;">Convertor ^C to ^F</h1>
-       
-                <input  type="number" name="" id="input-searching" class="input" placeholder="^C">
-       
-     <div class="flex-item">
-        <button type="submit" class="convert">Convert</button>
-        <button type="submit" class="reset">reset</button>
-        <button type="submit" class="change">change</button>
-
+    <div>
+        <h1 id="h1-as-title" style="text-align: center;">Converter K to °F</h1>
+        <input type="number" id="input-searching" class="input" placeholder="K">
+        <div class="flex-item">
+            <button type="button" class="convert">Convert</button>
+            <button type="button" class="reset">Reset</button>
+            <button type="button" class="change">Change</button>
+        </div>
     </div>
- 
-</div>
     <script>
-        let convert=document.querySelector('.convert')
-        let change=document.querySelector('.change')
-        let reset=document.querySelector('.reset')
+        let convert = document.querySelector('.convert');
+        let change = document.querySelector('.change');
+        let reset = document.querySelector('.reset');
 
-        var flag=true
+        let isKelvinToFahrenheit = true;
+        const input = document.getElementById('input-searching');
+        const h1 = document.getElementById('h1-as-title');
 
-        const input=document.getElementById('input-searching')
-        const h1=document.getElementById('h1-as-title')
+        change.addEventListener('click', function() {
+            isKelvinToFahrenheit = !isKelvinToFahrenheit;
+            h1.innerHTML = isKelvinToFahrenheit ? 'Converter K to °F' : 'Converter °F to K';
+            input.setAttribute('placeholder', isKelvinToFahrenheit ? 'K' : '°F');
+            input.value = '';
+            convert.removeAttribute('disabled');
+        });
 
-        change.addEventListener('click',function(){
-            convert.removeAttribute('disabled')
-            if(flag){
-                h1.innerHTML='Convertor ^F to ^C '
-                input.setAttribute('placeholder','^F')
-                input.value=''
-                flag=false
-            }else{
-                h1.innerHTML='Convertor ^C to ^F'
-                input.setAttribute('placeholder','^C')
+        reset.addEventListener('click', function() {
+            input.value = '';
+            convert.removeAttribute('disabled');
+        });
 
-                input.value=''
-
-                flag=true
-            }
-        
-        })
-
-        reset.addEventListener('click',function(){
-            input.value=''
-            convert.removeAttribute('disabled')
-
-        }) 
       
-        convert.addEventListener('click',function(){
-        if(input.value.length !=0){
-             if(flag){
-            let input_int_value=parseFloat(input.value,10)
-            input.value=input_int_value+69
-            convert.setAttribute('disabled',true)
-            
-           }else{
-            let input_int_value=parseFloat(input.value,10)
-            input.value=input_int_value-21
-            convert.setAttribute('disabled',true)
-
-           }
-        }else{
-            alert('you should write something')
-        }
-
-          
-            
-        })
-
     </script>
-
-
 </body>
 </html>
