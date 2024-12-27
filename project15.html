@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Music Player</title>  
     <style>  
-    
+        * {  
+            box-sizing: border-box;  
+            margin: 0;  
+            padding: 0;  
+        }  
+
+        body {  
+            font-family: Arial, sans-serif;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            height: 100vh;  
+            background-color: #f4f4f4;  
+        }  
+
+        .music-player {  
+            background-color: #fff;  
+            border-radius: 10px;  
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  
+            padding: 20px;  
+            width: 600;  
+            text-align: center;  
+        }  
 
         .track-info {  
             margin-bottom: 20px;  
@@ -25,7 +47,21 @@
             margin-bottom: 20px;  
         }  
 
-     
+        button {  
+            background-color: #4CAF50;  
+            border: none;  
+            border-radius: 5px;  
+            color: white;  
+            cursor: pointer;  
+            padding: 10px 15px;  
+            margin: 0 5px;  
+            font-size: 16px;  
+            transition: background 0.3s;  
+        }  
+
+        button:hover {  
+            background-color: #45a049;  
+        }  
 
         .volume-control {  
             width: 100%;  
@@ -68,7 +104,22 @@
             <h2 class="track-name">ghabrestoon HipHop</h2>  
             <h3 class="artist-name">Reza Pishro</h3>  
         </div>  
-       
+        <div class="controls">  
+            <button class="firstx-button">1X</button>  
+            <button class="prev-button">⏮ 15s</button>  
+            <button class="play-button">▶</button>  
+            <button class="next-button">⏭ 15s</button>  
+            <button class="secondx-button">2X</button>  
+        </div>  
+        <div class="spnas-time">  
+            <span class="span-showing-current-time"></span>  
+            <span class="span-showing-full-time"></span>  
+        </div>  
+        <input type="range" class="volume-control" min="0" max="100" value="0">  
+        
+        <!-- Audio Element -->  
+        <audio loop id="audio-player" src="./Reza Pishro - Ghabrestoone HipHop (BandMusic).mp3" preload="metadata"></audio>  
+    </div>  
 
     <script>  
         const audio = document.getElementById('audio-player');  
@@ -86,7 +137,16 @@
             return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;  
         }  
         
-     
+        // Play/Pause functionality  
+        playButton.addEventListener('click', function() {  
+            if (audio.paused) {  
+                audio.play();  
+                playButton.textContent = '⏸️';  
+            } else {  
+                audio.pause();  
+                playButton.textContent = '▶';  
+            }  
+        });  
         
         setInterval(function() {  
             document.querySelector('.span-showing-current-time').innerHTML = formatTime(audio.currentTime);  
