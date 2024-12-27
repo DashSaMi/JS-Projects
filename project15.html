@@ -1,0 +1,136 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Music Player</title>  
+    <style>  
+    
+
+        .track-info {  
+            margin-bottom: 20px;  
+        }  
+
+        .track-name {  
+            font-size: 1.5rem;  
+            color: #333;  
+        }  
+
+        .artist-name {  
+            font-size: 1rem;  
+            color: #555;  
+        }  
+
+        .controls {  
+            margin-bottom: 20px;  
+        }  
+
+     
+
+        .volume-control {  
+            width: 100%;  
+            margin: 10px 0;  
+            -webkit-appearance: none;  
+            appearance: none;  
+            height: 5px;  
+            background: #ddd;  
+            border-radius: 5px;  
+            outline: none;  
+            transition: background 0.3s; /* Smooth transition for background change */  
+        }  
+
+      
+    </style>  
+</head>  
+<body>  
+    <div class="music-player">  
+        <div class="track-info">  
+            <h2 class="track-name">ghabrestoon HipHop</h2>  
+            <h3 class="artist-name">Reza Pishro</h3>  
+        </div>  
+        <div class="controls">  
+            <button class="firstx-button">1X</button>  
+            <button class="prev-button">⏮ 15s</button>  
+            <button class="play-button">▶</button>  
+            <button class="next-button">⏭ 15s</button>  
+            <button class="secondx-button">2X</button>  
+        </div>  
+        <div class="spnas-time">  
+            <span class="span-showing-current-time"></span>  
+            <span class="span-showing-full-time"></span>  
+        </div>  
+        <input type="range" class="volume-control" min="0" max="100" value="0">  
+        
+        <!-- Audio Element -->  
+        <audio loop id="audio-player" src="./Reza Pishro - Ghabrestoone HipHop (BandMusic).mp3" preload="metadata"></audio>  
+    </div>  
+
+    <script>  
+        const audio = document.getElementById('audio-player');  
+        const playButton = document.querySelector('.play-button');  
+        const prevButton = document.querySelector('.prev-button');  
+        const control = document.querySelector('.volume-control');  
+        const nextButton = document.querySelector('.next-button');  
+        const speed1 = document.querySelector('.firstx-button');  
+        const speed2 = document.querySelector('.secondx-button');  
+        
+        // Function to format time in MM:SS  
+        function formatTime(time) {  
+            const minutes = Math.floor(time / 60);  
+            const seconds = Math.floor(time % 60);  
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;  
+        }  
+        
+        // Play/Pause functionality  
+        playButton.addEventListener('click', function() {  
+            if (audio.paused) {  
+                audio.play();  
+                playButton.textContent = '⏸️';  
+            } else {  
+                audio.pause();  
+                playButton.textContent = '▶';  
+            }  
+        });  
+        
+        setInterval(function() {  
+            document.querySelector('.span-showing-current-time').innerHTML = formatTime(audio.currentTime);  
+            background_input();  
+        }, 1000);  
+        
+        nextButton.addEventListener('click', function() {  
+            audio.currentTime += 15;  
+        });  
+        
+        prevButton.addEventListener('click', function() {  
+            audio.currentTime -= 15;  
+        });  
+        
+        speed1.addEventListener('click', function() {  
+            audio.playbackRate = 1;  
+        });  
+        
+        speed2.addEventListener('click', function() {  
+            audio.playbackRate = 2;  
+        });  
+
+        window.addEventListener('load',function(){
+            document.querySelector('.span-showing-full-time').innerHTML= formatTime(audio.duration);  
+        })
+        
+        // Function to update the volume and its background color  
+       
+        // Event listener for volume control  
+        
+        function background_input() {  
+            if (!audio.duration) return; // Prevent division by zero if duration is not available  
+            let all = audio.duration;  
+            let current_time = audio.currentTime;   
+            let res = (current_time / all) * 100; // Calculate the percentage of the current time  
+        
+            // Update the volume control's value based on current time  
+            control.value = res;  
+            control.style.background = `linear-gradient(to right, #007BFF ${res}%, #ddd ${res}%)`; // Change background color to primary blue  
+        }  
+    </script>  
+</body>  
+</html>
