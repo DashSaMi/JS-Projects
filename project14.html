@@ -1,0 +1,104 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Navbar Example</title>  
+    <link rel="stylesheet" href="styles.css">  
+    <style>
+        body {  
+            margin: 0;  
+            font-family: Arial, sans-serif;  
+            height: 150vh;  
+            background-color: #d5d5d5;  
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/008/969/361/small_2x/multi-layers-gray-blue-dark-texture-3d-papercut-layers-in-gradient-banner-abstract-paper-cut-art-background-design-for-website-template-topography-map-concept-or-smooth-origami-paper-cut-vector.jpg');  
+            background-repeat: no-repeat;  
+            background-size: cover;        
+            background-position: center;   
+        }
+        
+        .navbar {  
+            display: flex;  
+            justify-content: space-between;  
+            align-items: center;  
+            position: fixed;
+            width: 99%;
+            height: 5.5vh;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+
+            padding: 15px 10px;  
+            background-color: #e9e9e9;
+            transition: background-color 0.5s ease, height 0.5s ease; /* Smooth transition */  
+        }  
+        
+        .nav-left {  
+            display: flex;  
+            gap: 15px;  
+        
+        }  
+        
+        .nav-links {  
+            list-style: none;  
+            margin: 0;  
+            padding: 0;  
+            display: flex;  
+            gap: 20px;  
+            margin-right: 150px;
+        }  
+        
+        .nav-links a {  
+            text-decoration: none;  
+            color: #1c1c1c;  
+            transition: color 0.3s, transform 0.3s;  
+        }  
+        
+        .nav-links a:hover {  
+            color: #6795e4; /* Change color on hover */  
+            transform: scale(1.1); /* Slightly grow on hover */  
+        }  
+        
+        .logo img {  
+            height: 40px; /* Adjust logo height */  
+        }  
+        
+ 
+    </style>
+</head>  
+<body>  
+    <nav class="navbar">  
+        <div class="nav-left">  
+            <a href="#" class="button signup">Sign Up</a>  
+            <a href="#" class="button signin">Sign In</a>  
+        </div>  
+        <ul class="nav-links">  
+            <li><a href="#">Home</a></li>  
+            <li><a href="#">About</a></li>  
+            <li><a href="#">Services</a></li>  
+            <li><a href="#">Contact</a></li>  
+        </ul>  
+        <div class="logo">  
+            <img src="https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg" alt="Logo" width="45" height="60" class="img-profile">  
+        </div>  
+    </nav>  
+
+    <script>
+        document.addEventListener('scroll', function() {  
+            if (document.scrollingElement.scrollTop > 20) {  
+                const navLinks = document.querySelectorAll('.nav-links li a');  
+                
+              
+                navLinks.forEach(link => {  
+                    link.classList.add('item-li');  
+                });  
+        
+           
+                document.querySelector('.navbar').classList.add('navbar-black');  
+            } else {  
+               
+
+            }  
+        });
+    </script>
+</body>  
+</html>
