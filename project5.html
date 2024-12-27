@@ -39,7 +39,27 @@
             justify-content: center;
             margin-top: 20px;
         }
-     
+        .flex-item button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .flex-item button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        .flex-item button:active {
+            transform: scale(0.95);
+        }
+        .flex-item button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -74,7 +94,19 @@
             convert.removeAttribute('disabled');
         });
 
-      
+        convert.addEventListener('click', function() {
+            if (input.value.length !== 0) {
+                let inputValue = parseFloat(input.value);
+                if (isKelvinToFahrenheit) {
+                    input.value = (inputValue - 273.15) * 9/5 + 32; // K to °F
+                } else {
+                    input.value = (inputValue - 32) * 5/9 + 273.15; // °F to K
+                }
+                convert.setAttribute('disabled', true);
+            } else {
+                alert('Please enter a value.');
+            }
+        });
     </script>
 </body>
 </html>
