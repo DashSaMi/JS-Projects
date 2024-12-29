@@ -49,7 +49,41 @@
             display: block;
             margin-top: 1em; }
           
-        
+          #player {
+            background-color: #ecf0f1;
+            display: block;
+            overflow: hidden;
+            padding: 0 0 1em 0;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: #d8dcdd 0 5px 10px;
+            -moz-box-shadow: #d8dcdd 0 5px 10px;
+            box-shadow: #d8dcdd 0 5px 10px; }
+          
+          .info {
+            padding: 0.7rem;
+            position: relative;
+            font-family: 'Merriweather Sans';
+            color: #8b9195; }
+          
+          .love {
+            position: absolute;
+            top: .5em;
+            right: 1em; }
+          
+          .caratula {
+          
+            overflow: hidden;
+            height: 300px;
+            position: relative; }
+            .caratula img {
+              width: 100%;
+              height: 100%;
+            }
+          
           .controls {
             padding: 1em; }
             .controls ul li {
@@ -281,7 +315,21 @@
     let play = document.querySelector('.play');  
     let volume_btn = document.getElementById('volumeControl');  
 
-   
+    let songs_info = [  
+        {  
+            music_adress: './Reza Pishro - Ghabrestoone HipHop (BandMusic).mp3',  
+            title: 'Ghabrestoone HipHop',  
+            Artist: 'Reza Pishro',  
+            image: 'https://i1.sndcdn.com/artworks-gKu1EL7HYhxAoSyK-kqGrqw-t500x500.jpg'  
+        },  
+        {  
+            music_adress: './Reza-Pishro-Batel-Shod-abanmusics.com-320.mp3',  
+            title: 'Batel Shod',  
+            Artist: 'Reza Pishro',  
+            image: 'https://i1.sndcdn.com/artworks-wTRVORHtYtSdQbMz-U73k5w-t500x500.jpg'  
+        },  
+    ];  
+
     next_song.parentElement.addEventListener('click', function() {  
         index += 1;  
         put_info_place();  
@@ -302,7 +350,19 @@
         audio.play();  
     }  
 
-    
+    play.addEventListener('click', function() {  
+        if (audio.paused) {  
+            play_divs.classList.remove('icon-play');  
+            play_divs.classList.add('icon-stop');  
+            audio.play();  
+            console.log('play');  
+        } else {  
+            play_divs.classList.add('icon-play');  
+            play_divs.classList.remove('icon-stop');  
+            audio.pause();  
+            console.log('pause');  
+        }  
+    });  
 
     twox.parentElement.addEventListener('click', function() {  
         audio.playbackRate = 2;  
