@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn" id="btn-id">Saman</button>  
+    <input type="text" id="inp">
+    <h5 id="h5" style="color:RED;"></h5>
+
+    <script>  
+        document.getElementById('btn-id').addEventListener('click', () => {  
+            const value_check = () => {  
+                return new Promise((resolve, reject) => {  
+                    if (document.getElementById('btn-id').innerHTML.toLowerCase() === document.getElementById('inp').value.toLowerCase()) {  
+                        resolve(document.getElementById('inp').value.toLowerCase());  
+                    } else {  
+                        reject(document.getElementById('h5').innerHTML="you write wrong");  
+                    }  
+                });  
+            };  
+        
+            const value_reverse = (data) => {  
+                return new Promise((resolve, reject) => {  
+                   let array_input= data.split("")
+                    resolve(array_input); 
+                });  
+            };  
+            const value_res=(data)=>{
+                return new Promise((resolve,reject)=>{
+                    console.log(data," : is the name you write  ")
+                })
+            }
+
+            
+        
+           
+            value_check()  
+                .then(value_reverse)  
+                .then(value_res)
+                .catch(error => {  
+                   
+                });  
+        });
+     
+    
+    </script>
+</body>
+</html>
