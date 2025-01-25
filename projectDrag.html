@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: block;
+            margin: auto;
+            width: 500px;
+            height: 440px;
+            border-radius: 18px;
+            background-color: rgb(174, 185, 201);
+        }
+        .h1_item{
+            display: block;
+            text-align: center;
+            font-weight: 700;
+            margin: 10px;
+        }
+        .list{
+            text-align: center;
+            color: blue;
+            width:70%;
+            display: block;
+            margin: auto;
+            height: 250px;
+            border: 5px solid red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="container">  
+        <div class="h1s" id="h1_elm">
+              <h1 id="saman delete" class="h1_item" draggable="true" ondragstart="dragStartHandler(event)">  
+            Saman   
+        </h1>  
+        <h1 id="Amir delete" class="h1_item" draggable="true" ondragstart="dragStartHandler(event)">  
+            Amir   
+        </h1>  
+        <h1 id="emad delete" class="h1_item" draggable="true" ondragstart="dragStartHandler(event)">  
+            Emad   
+        </h1>  
+        </div>
+      
+    
+        <div id="item" class="list" ondragover="DragOverHandler(event)" ondrop="DragHandler(event)"></div>  
+    </div>  
+    
+    <script>  
+        function dragStartHandler(event) {  
+            event.dataTransfer.setData('value_item', event.target.id);  
+        }  
+    
+        function DragOverHandler(event) {  
+            event.preventDefault();  
+        }  
+    
+        function DragHandler(event) {  
+            let elm = event.dataTransfer.getData('value_item');  
+            let res = document.getElementById(elm);  
+    
+            document.getElementById('item').appendChild(res);  
+            console.log('Element dropped');  
+    
+          res.addEventListener('click',function(){
+            document.getElementById('h1_elm').appendChild(res);  
+          })
+          
+        }  
+
+      
+       
+    </script>
+ 
+</body>
+</html>
