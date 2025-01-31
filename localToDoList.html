@@ -189,8 +189,36 @@
         
     }  
 
+    function completeListeners() {  
+        const btn_complete = $.querySelectorAll('.completeBtn');  
+        btn_complete.forEach(function(btn_com) {  
+            btn_com.addEventListener('click', (event) => {  
+                const todoItem = event.target.parentElement.parentElement; 
+                const spanText = todoItem.querySelector('.spantext'); 
     
-
+                const isCompleted = spanText.style.textDecoration === 'line-through';  
+                if (isCompleted) {  
+                   
+                    spanText.style.textDecoration = '';
+                    event.target.innerHTML = 'Complete'; 
+                    event.target.style.backgroundColor = '';  
+                    todoItem.style.backgroundColor = '';  
+                } else {  
+                   
+                    spanText.style.textDecoration = 'line-through'; 
+                    event.target.innerHTML = 'Incomplete'; 
+                    event.target.style.backgroundColor = '#8c8c8c';  
+                    todoItem.style.backgroundColor = '#d1d1d1'; 
+                }  
+            });  
+        });  
+    }  
+     
+    function save_on_storage(input_array){  
+        
+        localStorage.setItem('Lists', JSON.stringify(input_array));  
+    }  
+    
     </script>
 </body>
 </html>
