@@ -135,90 +135,161 @@
         </ul>
     </div>
     <script>
-
-
-        array_save_local=[]
-       let $ = document
-
-       let btn_sub= $.getElementById('submitBtn')
-       let btn_delete=$.getElementById('deleteAllBtn')
-       let input_text=$.getElementById('todoInput')
-
-       //part one //
-       btn_delete.addEventListener('click', ()=>{
-        input_text.value=''
-       })
-
-       btn_sub.addEventListener('click',put_info_list)
-       input_text.addEventListener('keydown',(event)=>{
-        if(event.key==='Enter'){
-            put_info_list()
-        }
-       })
-
-       function put_info_list() {  
-        if(input_text.value != ''){
-              const value_input = input_text.value;  
-        input_text.value = '';  
-        $.getElementById('todoList').innerHTML += `  
-            <div class="todo-li d-flex">  
-                <span class="spantext">${value_input}</span>  
-                <div class="btns">  
-                    <button class="completeBtn" id="completeBtn">Complete</button>  
-                    <button class="btns_remove"  id="removeBtn">Remove</button>                   
-                </div>  
-            </div>  
-        `;  
-        item_send={'content': value_input , 'status': 'incomplete'}
-        array_save_local.push(item_send)
-        save_on_storage(array_save_local)
-        RemoveListeners();  
-        completeListeners()
-        }
-      
-    }  
-    
-    function RemoveListeners() {  
-        const btn_remove = $.querySelectorAll('.btns_remove');  
-        btn_remove.forEach(function(btn) {  
-            btn.addEventListener('click', function(event) {  
-              event.target.parentElement.parentElement.remove()
-              
-            });  
-        });  
+        let array_save_local = JSON.parse(localStorage.getItem('Lists')) || [];
+        let $ = document;
         
-    }  
-
-    function completeListeners() {  
-        const btn_complete = $.querySelectorAll('.completeBtn');  
-        btn_complete.forEach(function(btn_com) {  
-            btn_com.addEventListener('click', (event) => {  
-                const todoItem = event.target.parentElement.parentElement; 
-                const spanText = todoItem.querySelector('.spantext'); 
-    
-                const isCompleted = spanText.style.textDecoration === 'line-through';  
-                if (isCompleted) {  
-                   
-                    spanText.style.textDecoration = '';
-                    event.target.innerHTML = 'Complete'; 
-                    event.target.style.backgroundColor = '';  
-                    todoItem.style.backgroundColor = '';  
-                } else {  
-                   
-                    spanText.style.textDecoration = 'line-through'; 
-                    event.target.innerHTML = 'Incomplete'; 
-                    event.target.style.backgroundColor = '#8c8c8c';  
-                    todoItem.style.backgroundColor = '#d1d1d1'; 
-                }  
-            });  
-        });  
-    }  
-     
-    function save_on_storage(input_array){  
+        let btn_sub = $.getElementById('submitBtn');
+        let btn_delete = $.getElementById('deleteAllBtn');
+        let input_text = $.getElementById('todoInput');
         
-        localStorage.setItem('Lists', JSON.stringify(input_array));  
-    }  
-    
+        // Clear input and delete all tasks
+        btn_delete.addEventListener('click', () => {
+            input_text.value = '';
+            array_save_local = [];
+            localStorage.removeItem('Lists');
+            $.getElementById('todoList').innerHTML = '';
+        });
+        
+        // Add task on button click or Enter key
+        btn_sub.addEventListener('click', put_info_list);
+        input_text.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                put_info_list();
+            }
+        });
+        
+        // Add task to the list and local storage
+        function put_info_list() {
+            if (input_text.value.trim() !== '') {
+                const value_input = input_text.value.trim();
+                input_text.value = '';
+        
+                // Add task to the DOM
+                $.getElementById('todoList').innerHTML += `
+                    <div class="todo-li d-flex">
+                        <span class="spantext">${value_input}</span>
+                        <div class="btns">
+                            <button class="completeBtn" id="completeBtn">Complete</button>
+                            <button class="btns_remove" id="removeBtn">Remove</button>
+                        </div>
+                    </div>
+                `;
+        
+                // Add task to the local storage array
+                array_save_local.push({ 'content': value_input, 'status': false });
+                save_on_storage(array_save_local);
+        
+                // Attach event listeners for the new task
+                RemoveListeners();
+                completeListeners();
+            }
+        }
+        
+        // Remove task from the list and local storage
+        function RemoveListeners() {
+            const btn_remove = $.querySelectorAll('.btns_remove');
+            btn_remove.forEach(function (btn) {
+                btn.addEventListener('click', function (event) {
+                    const todoItem = event.target.parentElement.parentElement;
+                    const taskContent = todoItem.querySelector('.spantext').textContent;
+        
+                    // Remove task from the DOM
+                    todoItem.remove();
+        
+                    // Remove task from the local storage array
+                    array_save_local = array_save_local.filter(item => item.content !== taskContent);
+                    save_on_storage(array_save_local);
+                });
+            });
+        }
+        
+        // Toggle task completion status
+        function completeListeners() {
+            const btn_complete = $.querySelectorAll('.completeBtn');
+            btn_complete.forEach(function (btn_com) {
+                btn_com.addEventListener('click', (event) => {
+                    const todoItem = event.target.parentElement.parentElement;
+                    const spanText = todoItem.querySelector('.spantext');
+                    const taskContent = spanText.textContent;
+        
+                    const isCompleted = spanText.style.textDecoration === 'line-through';
+                    if (isCompleted) {
+                        // Mark as incomplete
+                        spanText.style.textDecoration = '';
+                        event.target.innerHTML = 'Complete';
+                        event.target.style.backgroundColor = '';
+                        todoItem.style.backgroundColor = '';
+                        updateStatusInStorage(taskContent, false);
+                    } else {
+                        // Mark as complete
+                        spanText.style.textDecoration = 'line-through';
+                        event.target.innerHTML = 'Incomplete';
+                        event.target.style.backgroundColor = '#8c8c8c';
+                        todoItem.style.backgroundColor = '#d1d1d1';
+                        updateStatusInStorage(taskContent, true);
+                    }
+                });
+            });
+        }
+        
+        // Save the updated array to local storage
+        function save_on_storage(input_array) {
+            localStorage.setItem('Lists', JSON.stringify(input_array));
+        }
+        
+        // Update the status of a task in local storage
+        function updateStatusInStorage(taskContent, status) {
+            array_save_local = array_save_local.map(item => {
+                if (item.content === taskContent) {
+                    item.status = status;
+                }
+                return item;
+            });
+            save_on_storage(array_save_local);
+        }
+        
+        // Load tasks from local storage when the page loads
+        window.addEventListener('load', () => {
+            array_save_local.forEach(item => {
+                // Add the task to the DOM
+                $.getElementById('todoList').innerHTML += `
+                    <div class="todo-li d-flex">
+                        <span class="spantext">${item.content}</span>
+                        <div class="btns">
+                            <button class="completeBtn" id="completeBtn">${item.status === true ? 'Incomplete' : 'Complete'}</button>
+                            <button class="btns_remove" id="removeBtn">Remove</button>
+                        </div>
+                    </div>
+                `;
+        
+                // Apply styles based on the task status
+                const parentDiv = document.getElementById('todoList');
+                const childDivs = parentDiv.querySelectorAll('.todo-li');
+        
+                childDivs.forEach((child) => {
+                    const spanText = child.querySelector('.spantext');
+                    const completeBtn = child.querySelector('.completeBtn');
+        
+                    // Check the status from the local storage item
+                    if (item.status === true) {
+                        spanText.style.textDecoration = 'line-through';
+                        completeBtn.innerHTML = 'Incomplete';
+                        completeBtn.style.backgroundColor = '#8c8c8c';
+                        child.style.backgroundColor = '#d1d1d1';
+                    } else {
+                        spanText.style.textDecoration = '';
+                        completeBtn.innerHTML = 'Complete';
+                        completeBtn.style.backgroundColor = '';
+                        child.style.backgroundColor = '';
+                    }
+                });
+            });
+        
+            // Attach event listeners
+            RemoveListeners();
+            completeListeners();
+        });
+
     </script>
 </body>
 </html>
