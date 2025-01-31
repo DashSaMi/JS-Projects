@@ -131,24 +131,23 @@
         <h2>Lists</h2>
         <ul id="todoList">
             <!-- Todo items will be dynamically added here -->
-             <div class="todo-li d-flex">
-                <span>test info</span>
-                <div class="btns">
-                    <button id="completeBtn">Complete</button>
-                    <button id="removeBtn">Remove</button>                   
-                </div>
-             </div>
+           
         </ul>
     </div>
     <script>
 
-        let $ = document
+
+        array_save_local=[]
+       let $ = document
 
        let btn_sub= $.getElementById('submitBtn')
        let btn_delete=$.getElementById('deleteAllBtn')
        let input_text=$.getElementById('todoInput')
 
        //part one //
+       btn_delete.addEventListener('click', ()=>{
+        input_text.value=''
+       })
 
        btn_sub.addEventListener('click',put_info_list)
        input_text.addEventListener('keydown',(event)=>{
@@ -157,7 +156,40 @@
         }
        })
 
- 
+       function put_info_list() {  
+        if(input_text.value != ''){
+              const value_input = input_text.value;  
+        input_text.value = '';  
+        $.getElementById('todoList').innerHTML += `  
+            <div class="todo-li d-flex">  
+                <span class="spantext">${value_input}</span>  
+                <div class="btns">  
+                    <button class="completeBtn" id="completeBtn">Complete</button>  
+                    <button class="btns_remove"  id="removeBtn">Remove</button>                   
+                </div>  
+            </div>  
+        `;  
+        item_send={'content': value_input , 'status': 'incomplete'}
+        array_save_local.push(item_send)
+        save_on_storage(array_save_local)
+        RemoveListeners();  
+        completeListeners()
+        }
+      
+    }  
+    
+    function RemoveListeners() {  
+        const btn_remove = $.querySelectorAll('.btns_remove');  
+        btn_remove.forEach(function(btn) {  
+            btn.addEventListener('click', function(event) {  
+              event.target.parentElement.parentElement.remove()
+              
+            });  
+        });  
+        
+    }  
+
+    
 
     </script>
 </body>
